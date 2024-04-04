@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "343416576890",
+    "project_id": "newstart-d7387",
+    "storage_bucket": "newstart-d7387.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343416576890:android:dfdff17e50c9e80e6dd4c3",
+        "android_client_info": {
+          "package_name": "com.example.newstart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_7tcxXPI7paHEDG2VPBtz24Y5IFFxOdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
