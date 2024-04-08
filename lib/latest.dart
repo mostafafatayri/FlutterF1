@@ -35,7 +35,6 @@ class LatestNewsPage extends StatelessWidget {
     );
   }
 }
-
 class NewsCard extends StatelessWidget {
   final String title;
   final String imageUrl;
@@ -54,10 +53,12 @@ class NewsCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       elevation: 4,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Image.asset(
+          // Use a flexible widget for the image so it can resize within the column
+          Flexible(
+            fit: FlexFit.tight,
+            child: Image.network(
               imageUrl,
               fit: BoxFit.cover,
             ),
@@ -67,23 +68,32 @@ class NewsCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  category,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                // Fixed height container for category
+                Container(
+                  height: 20,
+                  child: Text(
+                    category,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 SizedBox(height: 4),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
+                // Fixed height container for title
+                Container(
+                  height: 40, // for two lines of text
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

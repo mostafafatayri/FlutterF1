@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import  'addTrack.dart';
 import 'updateF1Team.dart';
+import 'AddBlogs.dart';
 
 void main() {
   runApp(MaterialApp(home: AddF1TeamPage()));
@@ -91,12 +92,14 @@ class _AddF1TeamPageState extends State<AddF1TeamPage> {
         await FirebaseFirestore.instance.collection("Drivers").add({
           'Name':driverOneNameController.text,
           'Points':0,
-          'Number':0
+          'Number':0,
+          'refID':newTeamId
         });
         await FirebaseFirestore.instance.collection("Drivers").add({
           'Name':driverTwoNameController.text,
           'Points':0,
-          'Number':0
+          'Number':0,
+          'refID':newTeamId
         });
 
 
@@ -247,14 +250,59 @@ class _AddF1TeamPageState extends State<AddF1TeamPage> {
                         DataCell(
                           IconButton(
                             icon: Icon(Icons.save),
-                            onPressed: () {
-                              document.reference.update({
+                            onPressed: () async {
+                              int newPoints = int.tryParse(pointsController.text) ?? 0;
+                              int newNumber = int.tryParse(NumberController.text) ?? 0;
+
+                              // Update the current document first
+                              await document.reference.update({
                                 'Name': nameController.text,
-                                'Points': int.tryParse(pointsController.text) ?? 0,
-                                'Number': int.tryParse(NumberController.text) ?? 0,
+                                'Points': newPoints,
+                                'Number': newNumber,
+                              });
+
+                              // Get the 'F1team' document by reference ID
+                              DocumentReference f1teamDocRef = FirebaseFirestore.instance.collection('F1team').doc(data['refID'].toString());
+
+                              FirebaseFirestore.instance.runTransaction((transaction) async {
+                                DocumentSnapshot f1teamSnapshot = await transaction.get(f1teamDocRef);
+
+                                if (!f1teamSnapshot.exists) {
+                                  throw Exception("F1team document does not exist!");
+                                }
+
+                                var f1teamData = f1teamSnapshot.data();
+                                if (f1teamData is Map<String, dynamic>) {
+                                  var currentPointsValue = f1teamData['Points'];
+                                  int currentPoints = 0;
+
+                                  // Check if the points value is a string and if so, parse it to int
+                                  if (currentPointsValue is String) {
+                                    currentPoints = int.tryParse(currentPointsValue) ?? 0;
+                                  } else if (currentPointsValue is int) {
+                                    // If it's already an int, use it directly
+                                    currentPoints = currentPointsValue;
+                                  }
+
+                                  int updatedPoints = currentPoints + newPoints;
+
+                                  // Perform the update
+                                  transaction.update(f1teamDocRef, {
+                                    'Points': updatedPoints.toString(), // Make sure to save it as a string if that's what your database expects
+                                  });
+                                } else {
+                                  throw Exception("Invalid data structure for F1team document");
+                                }
+                              }).then((value) {
+                                print('F1team document updated');
+                              }).catchError((error) {
+                                print('Failed to update F1team document: $error');
                               });
                             },
                           ),
+
+
+
                         ),
                         DataCell(
                           IconButton(
@@ -295,6 +343,22 @@ class _AddF1TeamPageState extends State<AddF1TeamPage> {
                     //onPrimary: Colors.white, // Set the text color of the button
                   ),
                 ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigate to the AddTrackPage when the button is pressed
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => BlogPostCreator()),
+                    );
+                  },
+                  child: Text('Add new blog'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red[900], // Set the background color of the button
+                    //onPrimary: Colors.white, // Set the text color of the button
+                  ),
+                ),
+
+
               ],
             ),
           ),
