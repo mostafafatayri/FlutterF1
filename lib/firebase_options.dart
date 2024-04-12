@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD58LLRg3w7qoczhtSxuHqGL-mOCKh7czs',
-    appId: '1:343416576890:web:2eab66123c5f05616dd4c3',
-    messagingSenderId: '343416576890',
-    projectId: 'newstart-d7387',
-    authDomain: 'newstart-d7387.firebaseapp.com',
-    storageBucket: 'newstart-d7387.appspot.com',
-    measurementId: 'G-3588CVJ14L',
+    apiKey: 'ID',
+    appId: 'ID',
+    messagingSenderId: 'ID',
+    projectId: 'ID',
+    authDomain: 'ID',
+    storageBucket: 'ID',
+    measurementId: 'ID',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA_7tcxXPI7paHEDG2VPBtz24Y5IFFxOdw',
-    appId: '1:343416576890:android:dfdff17e50c9e80e6dd4c3',
-    messagingSenderId: '343416576890',
-    projectId: 'newstart-d7387',
-    storageBucket: 'newstart-d7387.appspot.com',
+    apiKey: 'ID',
+    appId: 'ID',
+    messagingSenderId: 'ID',
+    projectId: 'ID',
+    storageBucket: 'ID',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAFM5iDBj5XSyXYh6qDL8QWttgvXsrFR04',
-    appId: '1:343416576890:ios:6c64d0372531273d6dd4c3',
-    messagingSenderId: '343416576890',
-    projectId: 'newstart-d7387',
-    storageBucket: 'newstart-d7387.appspot.com',
-    iosBundleId: 'com.example.newstart',
+    apiKey: 'ID',
+    appId: 'ID',
+    messagingSenderId: 'ID',
+    projectId: 'ID',
+    storageBucket: 'ID',
+    iosBundleId: 'ID',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAFM5iDBj5XSyXYh6qDL8QWttgvXsrFR04',
-    appId: '1:343416576890:ios:30a904577ebe60316dd4c3',
-    messagingSenderId: '343416576890',
-    projectId: 'newstart-d7387',
-    storageBucket: 'newstart-d7387.appspot.com',
-    iosBundleId: 'com.example.newstart.RunnerTests',
+    apiKey: 'ID',
+    appId: 'ID',
+    messagingSenderId: 'ID',
+    projectId: 'ID',
+    storageBucket: 'ID',
+    iosBundleId: 'ID',
   );
 }
